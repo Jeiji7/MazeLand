@@ -4,26 +4,41 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    public float speedPlayer = 5f;
+    public float speedPlayer = 5f; // Скорость игрока
+    public float jumpForce = 5f; // Сила прыжка
+    public LayerMask groundLayer; // Слой для земли
+    public Transform groundCheck; // Позиция для проверки соприкосновения с землёй
+    public float groundCheckRadius = 0.2f; // Радиус проверки соприкосновения с землёй
+
     private Rigidbody2D rb;
     private Transform tr;
     private Vector2 movement;
-
+    private bool isGrounded; // Флаг для проверки, на земле ли игрок
+    [Header("Animation")]
+    [SerializeField] private Animator MoveAnimation;
+    //[SerializeField] private bool AnimPlayerActive = false;
     void Start()
     {
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
-
+        //Time.timeScale = 2f;
         // Включаем интерполяцию для сглаживания движения
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
     }
 
     void Update()
     {
-        // Получаем направление движения по горизонтали и вертикали
+        // Получаем направление движения по горизонтали
         float _directionHorizontal = Input.GetAxis("Horizontal");
-        float _directionVertical = Input.GetAxis("Vertical");
-
+        if (_directionHorizontal != 0)
+        {
+            MoveAnimation.SetBool("MoveRun", true);
+        }
+        else
+        {
+            MoveAnimation.SetBool("MoveRun", false);
+            Debug.Log("Gavno");
+        }
         // Изменяем масштаб для отражения персонажа влево или вправо
         if (_directionHorizontal < 0)
             tr.localScale = new Vector3(-1, 1, 1);
@@ -31,12 +46,41 @@ public class Move : MonoBehaviour
             tr.localScale = new Vector3(1, 1, 1);
 
         // Обновляем переменную движения с учётом времени между кадрами
-        movement = new Vector2(_directionHorizontal, _directionVertical) * speedPlayer;
+        movement = new Vector2(_directionHorizontal, 0) * speedPlayer;
+
+        // Проверяем, на земле ли игрок
+        CheckGround();
+        if (isGrounded)
+            MoveAnimation.SetBool("MoveJump", false);
+        else
+        {
+            MoveAnimation.SetBool("MoveRun", false);
+            MoveAnimation.SetBool("MoveJump", true);
+        }
+
+        // Если игрок нажимает пробел и находится на земле, выполняем прыжок
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            Jump();
+        }
+
     }
 
     void FixedUpdate()
     {
         // Применяем движение к Rigidbody2D с учетом deltaTime для плавности
-        rb.velocity = movement * Time.fixedDeltaTime * 50f;
+        rb.velocity = new Vector2(movement.x, rb.velocity.y);
+    }
+
+    void Jump()
+    {
+        // Применяем силу прыжка
+        rb.velocity = new Vector2(rb.velocity.x * 1.4f, jumpForce);
+    }
+
+    void CheckGround()
+    {
+        // Проверка, соприкасается ли игрок с землёй
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 }
