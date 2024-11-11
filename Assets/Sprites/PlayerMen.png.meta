@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 579f9e1c281a5604abe35927b89a994f
-      internalID: 1761097602
+      spriteID: 9c26cdc5fd2d262489d3caaad3aae8ac
+      internalID: -2038723697
       vertices: []
       indices: 
       edges: []
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c266aa1a8f90734c8b7d395308b87af
-      internalID: 1885676769
+      spriteID: 9289ab8646deffe4db5c25c051ba6275
+      internalID: 690401557
       vertices: []
       indices: 
       edges: []
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6ef472e17e6c45488ce576481802cef
-      internalID: 1873493391
+      spriteID: 2edeba40620ff31408d08a9c8774df12
+      internalID: 162639684
       vertices: []
       indices: 
       edges: []
@@ -196,9 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerMen_0: 1761097602
-      PlayerMen_1: 1885676769
-      PlayerMen_2: 1873493391
+      PlayerMen_0: -2038723697
+      PlayerMen_1: 690401557
+      PlayerMen_2: 162639684
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

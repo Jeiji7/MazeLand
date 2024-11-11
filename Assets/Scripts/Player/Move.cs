@@ -16,7 +16,6 @@ public class Move : MonoBehaviour
     private bool isGrounded; // Флаг для проверки, на земле ли игрок
     [Header("Animation")]
     [SerializeField] private Animator MoveAnimation;
-    //[SerializeField] private bool AnimPlayerActive = false;
     void Start()
     {
         tr = GetComponent<Transform>();
@@ -37,7 +36,6 @@ public class Move : MonoBehaviour
         else
         {
             MoveAnimation.SetBool("MoveRun", false);
-            Debug.Log("Gavno");
         }
         // Изменяем масштаб для отражения персонажа влево или вправо
         if (_directionHorizontal < 0)
@@ -75,7 +73,7 @@ public class Move : MonoBehaviour
     void Jump()
     {
         // Применяем силу прыжка
-        rb.velocity = new Vector2(rb.velocity.x * 1.4f, jumpForce);
+        rb.velocity = new Vector2(jumpForce, jumpForce);
     }
 
     void CheckGround()
