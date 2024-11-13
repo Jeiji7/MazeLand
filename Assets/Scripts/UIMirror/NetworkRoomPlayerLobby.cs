@@ -13,9 +13,9 @@ public class NetworkRoomPlayerLobby : NetworkBehaviour
     [SerializeField] private TMP_Text[] playerReadyTexts = new TMP_Text[4];
     [SerializeField] private Button startGameButton = null;
 
-    [SyncVar(hook = nameof(HandleDisplayNameChange))]
+    [SyncVar(hook = nameof(HandleDisplayNameChanged))]
     public string DisplayName = "Loading...";
-    [SyncVar(hook = nameof(HandleReadyStatusChange))]
+    [SyncVar(hook = nameof(HandleReadyStatusChanged))]
     public bool IsReady = false;
 
     private bool isLeader;
@@ -29,15 +29,11 @@ public class NetworkRoomPlayerLobby : NetworkBehaviour
     }
 
     private NetworkManagerLobby room;
-
     private NetworkManagerLobby Room
     {
         get
         {
-            if (room != null)
-            {
-                return room;
-            }
+            if (room != null) { return room; }
             return room = NetworkManager.singleton as NetworkManagerLobby;
         }
     }
@@ -45,6 +41,7 @@ public class NetworkRoomPlayerLobby : NetworkBehaviour
     public override void OnStartAuthority()
     {
         CmdSetDisplayName(PlayerNameInput.DisplayName);
+
         lobbyUI.SetActive(true);
     }
 
@@ -54,19 +51,16 @@ public class NetworkRoomPlayerLobby : NetworkBehaviour
 
         UpdateDisplay();
     }
+
     public override void OnStopClient()
     {
-        if (Room != null && Room.RoomPlayers.Contains(this))
-        {
-            Room.RoomPlayers.Remove(this);
-            UpdateDisplay();
-        }
-        
+        Room.RoomPlayers.Remove(this);
+
+        UpdateDisplay();
     }
 
-
-    public void HandleReadyStatusChange(bool oldValue, bool newValue) => UpdateDisplay();
-    public void HandleDisplayNameChange(string oldValue, string newValue) => UpdateDisplay();
+    public void HandleReadyStatusChanged(bool oldValue, bool newValue) => UpdateDisplay();
+    public void HandleDisplayNameChanged(string oldValue, string newValue) => UpdateDisplay();
 
     private void UpdateDisplay()
     {
@@ -80,12 +74,13 @@ public class NetworkRoomPlayerLobby : NetworkBehaviour
                     break;
                 }
             }
+
             return;
         }
 
         for (int i = 0; i < playerNameTexts.Length; i++)
         {
-            playerNameTexts[i].text = "Waiting for Player...";
+            playerNameTexts[i].text = "Waiting For Player...";
             playerReadyTexts[i].text = string.Empty;
         }
 
@@ -97,19 +92,17 @@ public class NetworkRoomPlayerLobby : NetworkBehaviour
                 "<color=red>Not Ready</color>";
         }
     }
+
     public void HandleReadyToStart(bool readyToStart)
     {
-        if (!isLeader)
-        {
-            return;
-        }
+        if (!isLeader) { return; }
+
         startGameButton.interactable = readyToStart;
     }
 
     [Command]
     private void CmdSetDisplayName(string displayName)
     {
-        //Тут настройки имени можно сделать, ну вроде как)
         DisplayName = displayName;
     }
 
@@ -118,7 +111,7 @@ public class NetworkRoomPlayerLobby : NetworkBehaviour
     {
         IsReady = !IsReady;
 
-        Room.NotifyPlayerOfReadyState();
+        Room.NotifyPlayersOfReadyState();
     }
 
     [Command]
@@ -126,7 +119,8 @@ public class NetworkRoomPlayerLobby : NetworkBehaviour
     {
         if (Room.RoomPlayers[0].connectionToClient != connectionToClient) { return; }
 
-        //Start Game
+       // Room.StartGame();
     }
 }
+
 
