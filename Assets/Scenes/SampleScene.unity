@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &31146992 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1081874106134536708, guid: 4be4fae9c38a58746b0eb0a10728579f, type: 3}
+  m_PrefabInstance: {fileID: 1056395565}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &185474891
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +348,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 96.7, y: 2.7799997, z: -10}
+  m_LocalPosition: {x: 4.76, y: 3.6799998, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -567,7 +572,7 @@ GameObject:
   - component: {fileID: 638274267}
   m_Layer: 6
   m_Name: Tilemap
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13882,6 +13887,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 956816582}
   m_CullTransparentMesh: 1
+--- !u!1001 &1056395565
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1081874106134536708, guid: 4be4fae9c38a58746b0eb0a10728579f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081874106134536708, guid: 4be4fae9c38a58746b0eb0a10728579f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081874106134536708, guid: 4be4fae9c38a58746b0eb0a10728579f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081874106134536708, guid: 4be4fae9c38a58746b0eb0a10728579f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081874106134536708, guid: 4be4fae9c38a58746b0eb0a10728579f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081874106134536708, guid: 4be4fae9c38a58746b0eb0a10728579f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081874106134536708, guid: 4be4fae9c38a58746b0eb0a10728579f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081874106134536708, guid: 4be4fae9c38a58746b0eb0a10728579f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081874106134536708, guid: 4be4fae9c38a58746b0eb0a10728579f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081874106134536708, guid: 4be4fae9c38a58746b0eb0a10728579f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291082137272384103, guid: 4be4fae9c38a58746b0eb0a10728579f, type: 3}
+      propertyPath: m_Name
+      value: SoltDemon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2893656381537020464, guid: 4be4fae9c38a58746b0eb0a10728579f, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3321234310
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4be4fae9c38a58746b0eb0a10728579f, type: 3}
 --- !u!1 &1266575205
 GameObject:
   m_ObjectHideFlags: 0
@@ -14226,11 +14292,11 @@ PrefabInstance:
     - target: {fileID: 1591885982796595067, guid: a3eb0f735a647c54f9eb9523e3f16e4b, type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 1788742388}
+      objectReference: {fileID: 31146992}
     - target: {fileID: 1591885982796595067, guid: a3eb0f735a647c54f9eb9523e3f16e4b, type: 3}
       propertyPath: m_LookAt
       value: 
-      objectReference: {fileID: 1788742388}
+      objectReference: {fileID: 31146992}
     - target: {fileID: 1591885982796595067, guid: a3eb0f735a647c54f9eb9523e3f16e4b, type: 3}
       propertyPath: m_Priority
       value: 10
@@ -14245,11 +14311,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3445932838420419239, guid: a3eb0f735a647c54f9eb9523e3f16e4b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 96.7
+      value: 4.76
       objectReference: {fileID: 0}
     - target: {fileID: 3445932838420419239, guid: a3eb0f735a647c54f9eb9523e3f16e4b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.7799997
+      value: 3.6799998
       objectReference: {fileID: 0}
     - target: {fileID: 3445932838420419239, guid: a3eb0f735a647c54f9eb9523e3f16e4b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14641,12 +14707,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779214c5ee756d84b8a0ab191e794f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundPrefab: {fileID: 205789110330811984, guid: 5bd865a0f3cef814d8a981e73377c126, type: 3}
-  finishPrefab: {fileID: 6592664898048885684, guid: 8e32c8eb052a0b541a11422a8f4a4fa2, type: 3}
-  levelLength: 680
-  startZoneLength: 50
-  finishZoneLength: 30
-  miniGameLength: 100
 --- !u!4 &1575609777
 Transform:
   m_ObjectHideFlags: 0
@@ -14680,11 +14740,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2510591664326401188, guid: 2b544d20813e3834188da992f9775f70, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3611728597190968519, guid: 2b544d20813e3834188da992f9775f70, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 96.7
+      value: 6.32
       objectReference: {fileID: 0}
     - target: {fileID: 3611728597190968519, guid: 2b544d20813e3834188da992f9775f70, type: 3}
       propertyPath: m_LocalPosition.y
@@ -14735,11 +14795,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b544d20813e3834188da992f9775f70, type: 3}
---- !u!4 &1788742388 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3611728597190968519, guid: 2b544d20813e3834188da992f9775f70, type: 3}
-  m_PrefabInstance: {fileID: 1772811083}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1824313530
 GameObject:
   m_ObjectHideFlags: 0
@@ -14999,3 +15054,4 @@ SceneRoots:
   - {fileID: 842944973}
   - {fileID: 1772811083}
   - {fileID: 1454455523}
+  - {fileID: 1056395565}

@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rockPrefab: {fileID: 4013672831525978331, guid: a9079770bc9305645966ad3816028e97, type: 3}
   throwPosition: {fileID: 8691975866957775958}
-  throwForce: 16
-  throwAngle: 15
+  throwForce: 23
+  throwAngle: 12
   AttackAnimation: {fileID: 1567780137960525589}
 --- !u!1 &8665967025947419570
 GameObject:
@@ -144,11 +144,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 70e6861ffbe525846944208e87b05a67, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 99.55099
+      value: 4.76
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 70e6861ffbe525846944208e87b05a67, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.35844088
+      value: 1.28
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 70e6861ffbe525846944208e87b05a67, type: 3}
       propertyPath: m_LocalPosition.z
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 416182651
+  GlobalObjectIdHash: 3321234310
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1

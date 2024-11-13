@@ -49,6 +49,8 @@ public class RockThrow : MonoBehaviour
             Vector2 throwDirection = new Vector2(tr.localScale.x * Mathf.Cos(throwAngleRad), Mathf.Sin(throwAngleRad));
             rb.velocity = throwDirection * throwForce;
         }
+
+        Destroy(rockInstance, 1.5f);
     }
 
     private IEnumerator PlayerAttack()
