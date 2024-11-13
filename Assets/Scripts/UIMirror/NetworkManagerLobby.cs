@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManagerLobby : NetworkManager
 {
+    [SerializeField] private int minPlayers = 2;
     [Scene][SerializeField] private string menuScene = string.Empty;
 
     [Header("Room")]
@@ -15,6 +16,7 @@ public class NetworkManagerLobby : NetworkManager
     public static event Action OnClientConnected;
     public static event Action OnClientDisconnected;
 
+    public List<NetworkRoomPlayerLobby> RoomPlayers { get; } = new List<NetworkRoomPlayerLobby>();
     public override void OnStartServer()
     {
         spawnPrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs").ToList();
@@ -22,8 +24,18 @@ public class NetworkManagerLobby : NetworkManager
 
     public override void OnStartClient()
     {
-        // Префабы автоматически регистрируются, удаляем ClientScene.RegisterPrefab
+        var spawnablePrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs");
+
+        foreach (var prefab in spawnablePrefabs)
+        {
+            // Регистрируем префаб только если он ещё не был зарегистрирован
+            if (!NetworkClient.prefabs.ContainsKey((uint)prefab.GetInstanceID()))
+            {
+                NetworkClient.RegisterPrefab(prefab);
+            }
+        }
     }
+
 
     public override void OnClientConnect()
     {
@@ -33,40 +45,80 @@ public class NetworkManagerLobby : NetworkManager
 
     public override void OnClientDisconnect()
     {
+        Debug.Log("Client disconnected from server.");
         base.OnClientDisconnect();
         OnClientDisconnected?.Invoke();
     }
 
     public override void OnServerConnect(NetworkConnectionToClient conn)
-    {
-        //if (numPlayers >= maxConnections || SceneManager.GetActiveScene().name != menuScene)
-        //{
-        //    conn.Disconnect();
-        //    return;
-        //}
-        Debug.Log("Server received connection attempt");
-        if (numPlayers >= maxConnections)
         {
-            Debug.Log("Connection rejected: max players reached");
-            conn.Disconnect();
-            return;
+            if (numPlayers >= maxConnections)
+            {
+                conn.Disconnect();
+                return;
+            }
+
+            if (SceneManager.GetActiveScene().name != menuScene)
+            {
+                conn.Disconnect();
+                return;
+            }
         }
 
-        if (SceneManager.GetActiveScene().name != menuScene)
-        {
-            Debug.Log("Connection rejected: wrong scene");
-            conn.Disconnect();
-            return;
-        }
-    }
+
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
         if (SceneManager.GetActiveScene().name == menuScene)
         {
+            bool isLeader = RoomPlayers.Count == 0;
+
             NetworkRoomPlayerLobby roomPlayerInstance = Instantiate(roomPlayerPrefab);
+
+            roomPlayerInstance.IsLeader = isLeader;
 
             NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
         }
+    }
+
+    public override void OnServerDisconnect(NetworkConnectionToClient conn)
+    {
+        if (conn.identity != null)
+        {
+            var player = conn.identity.GetComponent<NetworkRoomPlayerLobby>();
+
+            RoomPlayers.Remove(player);
+            NotifyPlayerOfReadyState();
+        }
+
+        base.OnServerDisconnect(conn);
+    }
+
+    public override void OnStopServer()
+    {
+        RoomPlayers.Clear();
+    }
+
+    public void NotifyPlayerOfReadyState()
+    {
+        foreach (var player in RoomPlayers)
+        {
+            player.HandleReadyToStart(IsReadyToStart());
+        }
+    }
+    private bool IsReadyToStart()
+    {
+        if (numPlayers < minPlayers)
+        {
+            return false;
+        }
+        foreach (var player in RoomPlayers)
+        {
+            if (!player.IsReady)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
