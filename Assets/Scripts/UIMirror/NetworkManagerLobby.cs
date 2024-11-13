@@ -2,15 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mirror;
-using UnityEditor.MemoryProfiler;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class NetworkManagerLobby : NetworkManager
 {
     [SerializeField] private int minPlayers = 2;
-    [Scene][SerializeField] private string menuScene = "ConnectionMenu";
+    [Scene][SerializeField] private string menuScene = string.Empty;
 
     //[Header("Maps")]
     //[SerializeField] private int numberOfRounds = 1;
@@ -36,67 +34,24 @@ public class NetworkManagerLobby : NetworkManager
 
     public override void OnStartServer() => spawnPrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs").ToList();
 
-    //public override void OnStartClient()
-    //{
-    //    var spawnablePrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs");
-
-    //    foreach (var prefab in spawnablePrefabs)
-    //    {
-    //        if (!NetworkClient.prefabs.ContainsKey(prefab.GetComponent<NetworkIdentity>().assetId)) // Проверяем по assetId
-    //        {
-    //            NetworkClient.RegisterPrefab(prefab);
-    //        }
-    //        else
-    //        {
-    //            Debug.LogWarning($"Prefab {prefab.name} уже зарегистрирован с assetId {prefab.GetComponent<NetworkIdentity>().assetId}");
-    //        }
-    //    }
-    //}
     public override void OnStartClient()
     {
         var spawnablePrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs");
 
         foreach (var prefab in spawnablePrefabs)
         {
-            var networkIdentity = prefab.GetComponent<NetworkIdentity>();
-
-            if (networkIdentity == null)
+            NetworkClient.RegisterPrefab(prefab);
+            if (!spawnPrefabs.Contains(prefab))
             {
-                Debug.LogWarning($"Prefab {prefab.name} не имеет компонента NetworkIdentity и не может быть зарегистрирован.");
-                continue;
+                spawnPrefabs.Add(prefab);
             }
-
-            if (!NetworkClient.prefabs.ContainsKey(networkIdentity.assetId))
-            {
-                NetworkClient.RegisterPrefab(prefab);
-            }
-            else
-            {
-                Debug.LogWarning($"Prefab {prefab.name} уже зарегистрирован с assetId {networkIdentity.assetId}");
-            }
-        }
-
-        // Спавним объекты на сцене, как только клиент подключается
-        SpawnObjectsOnScene();
-    }
-
-    private void SpawnObjectsOnScene()
-    {
-        var spawnablePrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs");
-
-        foreach (var prefab in spawnablePrefabs)
-        {
-            // Создаем объект на сцене
-            GameObject spawnedObject = Instantiate(prefab);
-
-            // Спавним его в сети
-            NetworkServer.Spawn(spawnedObject);
+            Debug.Log(prefab.name);
         }
     }
-
 
     public override void OnClientConnect()
     {
+        Debug.Log("Клиент подключился!");
         base.OnClientConnect();
 
         OnClientConnected?.Invoke();
@@ -104,6 +59,7 @@ public class NetworkManagerLobby : NetworkManager
 
     public override void OnClientDisconnect()
     {
+        Debug.Log("Смерть смерть смерть дисконект");
         base.OnClientDisconnect();
 
         OnClientDisconnected?.Invoke();
@@ -111,8 +67,11 @@ public class NetworkManagerLobby : NetworkManager
 
     public override void OnServerConnect(NetworkConnectionToClient conn)
     {
+        int playerCount = NetworkServer.connections.Count;
+        Debug.Log($"Сейчас подключено игроков: {playerCount}");
         if (numPlayers >= maxConnections)
         {
+            Debug.Log("Смерть смерть смерть дисконект Норм");
             conn.Disconnect();
             return;
         }
@@ -191,30 +150,29 @@ public class NetworkManagerLobby : NetworkManager
 
             //mapHandler = new MapHandler(mapSet, numberOfRounds);
 
-            //ServerChangeScene(mapHandler.NextMap);
-            ServerChangeScene("MenuGame");
+            ServerChangeScene("MainMenu");
         }
     }
 
-    public override void ServerChangeScene(string newSceneName)
-    {
-        // From menu to game
-        if (SceneManager.GetActiveScene().name == menuScene && newSceneName.StartsWith("Scene_Map"))
-        {
-            for (int i = RoomPlayers.Count - 1; i >= 0; i--)
-            {
-                var conn = RoomPlayers[i].connectionToClient;
-                var gameplayerInstance = Instantiate(gamePlayerPrefab);
-                gameplayerInstance.SetDisplayName(RoomPlayers[i].DisplayName);
+    //public override void ServerChangeScene(string newSceneName)
+    //{
+    //    // From menu to game
+    //    if (SceneManager.GetActiveScene().name == menuScene && newSceneName.StartsWith("Scene_Map"))
+    //    {
+    //        for (int i = RoomPlayers.Count - 1; i >= 0; i--)
+    //        {
+    //            var conn = RoomPlayers[i].connectionToClient;
+    //            var gameplayerInstance = Instantiate(gamePlayerPrefab);
+    //            gameplayerInstance.SetDisplayName(RoomPlayers[i].DisplayName);
 
-                NetworkServer.Destroy(conn.identity.gameObject);
+    //            NetworkServer.Destroy(conn.identity.gameObject);
 
-                NetworkServer.ReplacePlayerForConnection(conn, gameplayerInstance.gameObject);
-            }
-        }
+    //            NetworkServer.ReplacePlayerForConnection(conn, gameplayerInstance.gameObject);
+    //        }
+    //    }
 
-        base.ServerChangeScene(newSceneName);
-    }
+    //    base.ServerChangeScene(newSceneName);
+    //}
 
     //public override void OnServerSceneChanged(string sceneName)
     //{
