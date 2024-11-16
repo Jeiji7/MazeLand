@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class RockThrow : MonoBehaviour
 {
-    public GameObject rockPrefab; // Префаб камня
+    [SerializeField]private GameObject rockPrefab; // Префаб камня
+    [SerializeField]private GameObject oilrockPrefab; // Префаб черного замедляющего камня
     public Transform throwPosition; // Позиция, из которой будет брошен камень
     public float throwForce = 10f; // Сила броска
     public float throwAngle = 45f; // Угол броска в градусах
+    private int numberAttack = 0;
     private Transform tr;
     [Header("Animation")]
     public Animator AttackAnimation;
@@ -28,14 +30,33 @@ public class RockThrow : MonoBehaviour
             tr.localScale = new Vector3(1, 1, 1);
         if (Input.GetKeyDown(KeyCode.K)) // Замените на нужную кнопку
         {
+            numberAttack = 1;
+            StartCoroutine(PlayerAttack());
+        }
+        if (Input.GetKeyDown(KeyCode.J)) 
+        {
+            numberAttack = 2;
             StartCoroutine(PlayerAttack());
         }
     }
     // Метод для броска камня
     public void ThrowRock()
     {
+        GameObject rockInstance;
         // Создаём камень в позиции throwPosition
-        GameObject rockInstance = Instantiate(rockPrefab, throwPosition.position, Quaternion.identity);
+        if (numberAttack == 1)
+        {
+            rockInstance = Instantiate(rockPrefab, throwPosition.position, Quaternion.identity);
+        }
+        else if (numberAttack == 2)
+        {
+            rockInstance = Instantiate(oilrockPrefab, throwPosition.position, Quaternion.identity);
+        }
+        else
+        {
+            rockInstance = null;  
+            Debug.LogError("Invalid attack number: " + numberAttack);
+        }
 
         // Получаем компонент Rigidbody2D камня
         Rigidbody2D rb = rockInstance.GetComponent<Rigidbody2D>();
@@ -63,4 +84,5 @@ public class RockThrow : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         AttackAnimation.SetBool("Attack", false);
     }
+    
 }

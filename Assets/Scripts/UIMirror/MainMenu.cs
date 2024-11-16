@@ -1,24 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private NetworkManagerLobby networkManager = null;
+    [SerializeField] private NetworkManagerLobby networkManager;
+    [SerializeField] private Button hostButton;
+    [SerializeField] private Button joinButton;
 
-    [Header("UI")]
-    [SerializeField] private GameObject landingPagePanel = null;
+    private void OnEnable()
+    {
+        hostButton.onClick.AddListener(HostLobby);
+        joinButton.onClick.AddListener(JoinLobby);
+    }
+
+    private void OnDisable()
+    {
+        hostButton.onClick.RemoveListener(HostLobby);
+        joinButton.onClick.RemoveListener(JoinLobby);
+    }
 
     public void HostLobby()
     {
-        if (networkManager == null)
-        {
-            Debug.LogError("NetworkManager is not set in MainMenu.");
-            return;
-        }
-
         networkManager.StartHost();
-        landingPagePanel.SetActive(false);
     }
 
+    public void JoinLobby()
+    {
+        networkManager.StartClient();
+    }
 }
