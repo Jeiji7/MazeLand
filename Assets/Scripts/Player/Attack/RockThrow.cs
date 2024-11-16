@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class RockThrow : MonoBehaviour
 {
-    [SerializeField]private GameObject rockPrefab; // Префаб камня
-    [SerializeField]private GameObject oilrockPrefab; // Префаб черного замедляющего камня
+    [Header("Stouns")]
+    [SerializeField] private GameObject rockPrefab; // Префаб камня
+    [SerializeField] private bool rockStoune = true;
+    [SerializeField] private GameObject oilrockPrefab; // Префаб черного замедляющего камня
+    [SerializeField] private bool oilStoune = true;
     public Transform throwPosition; // Позиция, из которой будет брошен камень
     public float throwForce = 10f; // Сила броска
     public float throwAngle = 45f; // Угол броска в градусах
@@ -28,15 +31,17 @@ public class RockThrow : MonoBehaviour
             tr.localScale = new Vector3(-1, 1, 1);
         else if (_directionHorizontal > 0)
             tr.localScale = new Vector3(1, 1, 1);
-        if (Input.GetKeyDown(KeyCode.K)) // Замените на нужную кнопку
+        if (Input.GetKeyDown(KeyCode.K) && rockStoune) // Замените на нужную кнопку
         {
+            rockStoune = false;
             numberAttack = 1;
-            StartCoroutine(PlayerAttack());
+            StartCoroutine(PlayerAttackRockStoune());
         }
-        if (Input.GetKeyDown(KeyCode.J)) 
+        else if (Input.GetKeyDown(KeyCode.J) && oilStoune)
         {
+            oilStoune = false;
             numberAttack = 2;
-            StartCoroutine(PlayerAttack());
+            StartCoroutine(PlayerAttackOilStoune());
         }
     }
     // Метод для броска камня
@@ -54,7 +59,7 @@ public class RockThrow : MonoBehaviour
         }
         else
         {
-            rockInstance = null;  
+            rockInstance = null;
             Debug.LogError("Invalid attack number: " + numberAttack);
         }
 
@@ -74,7 +79,7 @@ public class RockThrow : MonoBehaviour
         Destroy(rockInstance, 1.5f);
     }
 
-    private IEnumerator PlayerAttack()
+    private IEnumerator PlayerAttackRockStoune()
     {
         AttackAnimation.SetBool("MoveRun", false);
         AttackAnimation.SetBool("MoveJump", false);
@@ -83,6 +88,23 @@ public class RockThrow : MonoBehaviour
         ThrowRock();
         yield return new WaitForSeconds(0.5f);
         AttackAnimation.SetBool("Attack", false);
+        yield return new WaitForSeconds(4.3f);
+        rockStoune = true;
+
+        yield return new WaitForSeconds(7.3f);
+        oilStoune = true;
     }
-    
+    private IEnumerator PlayerAttackOilStoune()
+    {
+        AttackAnimation.SetBool("MoveRun", false);
+        AttackAnimation.SetBool("MoveJump", false);
+        AttackAnimation.SetBool("Attack", true);
+        yield return new WaitForSeconds(0.2f);
+        ThrowRock();
+        yield return new WaitForSeconds(0.5f);
+        AttackAnimation.SetBool("Attack", false);
+        yield return new WaitForSeconds(7.3f);
+        oilStoune = true;
+    }
+
 }

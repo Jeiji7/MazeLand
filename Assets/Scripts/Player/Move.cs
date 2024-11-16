@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Move : MonoBehaviour
 {
     public float speedPlayer = 5f; // Скорость игрока
@@ -10,6 +11,7 @@ public class Move : MonoBehaviour
     public Transform groundCheck; // Позиция для проверки соприкосновения с землёй
     public float groundCheckRadius = 0.2f; // Радиус проверки соприкосновения с землёй
 
+    private CapsuleCollider2D playerCollider;
     private Rigidbody2D rb;
     private Transform tr;
     private Vector2 movement;
@@ -18,6 +20,7 @@ public class Move : MonoBehaviour
     [SerializeField] private Animator MoveAnimation;
     void Start()
     {
+        playerCollider = GetComponent<CapsuleCollider2D>();
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         //Time.timeScale = 2f;
