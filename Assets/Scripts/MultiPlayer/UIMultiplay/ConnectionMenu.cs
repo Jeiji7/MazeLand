@@ -28,7 +28,7 @@ public class ConnectionMenu : MonoBehaviour
         {
             if (!string.IsNullOrEmpty(nameInputField.text))
             {
-                PlayerData.Instance.SetPlayerName(nameInputField.text); // Сохранение имени
+                //PlayerData.Instance.SetPlayerName(nameInputField.text); // Сохранение имени
                 SceneManager.LoadScene("MenuGame"); // Переход на следующую сцену
                 InitializationOptions initializationOptions = new();
                 initializationOptions.SetProfile(nameInputField.text);

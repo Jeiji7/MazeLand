@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 
-public class Move : MonoBehaviour
+public class Move : NetworkBehaviour
 {
     public float speedPlayer = 5f; // Скорость игрока
     public float jumpForce = 5f; // Сила прыжка
@@ -30,6 +31,8 @@ public class Move : MonoBehaviour
 
     void Update()
     {
+        if (!IsOwner)
+            return;
         // Получаем направление движения по горизонтали
         float _directionHorizontal = Input.GetAxis("Horizontal");
         if (_directionHorizontal != 0)

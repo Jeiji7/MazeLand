@@ -1,28 +1,24 @@
-using TMPro;
-using UnityEngine.UI;
-using UnityEngine;
+using System;
+using Unity.Collections;
+using Unity.Netcode;
 
-public class PlayerData : MonoBehaviour
+public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
 {
-    public static PlayerData Instance { get; private set; }
+    public ulong clientId;
+    public FixedString64Bytes playerName;
+    public FixedString64Bytes playerId;
 
-    public string PlayerName { get; private set; }
-
-    private void Awake()
+    public bool Equals(PlayerData other)
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        return clientId == other.clientId &&
+               playerName == other.playerName &&
+               playerId == other.playerId;
     }
 
-    public void SetPlayerName(string name)
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
-        PlayerName = name;
+        serializer.SerializeValue(ref clientId);
+        serializer.SerializeValue(ref playerName);
+        serializer.SerializeValue(ref playerId);
     }
 }
