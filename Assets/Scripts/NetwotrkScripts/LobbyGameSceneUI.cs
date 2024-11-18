@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class LobbyGameSceneUI : NetworkBehaviour
 {
+    [SerializeField] public static int _sceneNumber = 0;
     [SerializeField] private Button _mainMenuButton;
     [SerializeField] private Button _readyButton;
     [SerializeField] private GameObject _choiceScene;
@@ -34,6 +35,12 @@ public class LobbyGameSceneUI : NetworkBehaviour
             _readyButton.gameObject.SetActive(false);   
         }
         _copyCodeButton.onClick.AddListener(CopyLobbyCode);
+    }
+
+    public void SetSceneNumber(int sceneNumber)
+    {
+        _sceneNumber = sceneNumber; // Устанавливаем значение
+        Debug.Log("Выбрана сцена: " + _sceneNumber);
     }
 
     private void CopyLobbyCode()

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aa9b0f9a2b9b16b4ab5bde334d7c1286
+guid: 5395f861eb4bdab46ab58c74337ec25c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cdb5b31ae8b39c640a70f1518c4802b9
-      internalID: -2025056486
+      spriteID: 765419db8bbd5b74887550d092d3a143
+      internalID: 1272312266
       vertices: []
       indices: 
       edges: []
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d78d34917c0101c458bb2bf3c8298cf2
-      internalID: -540668373
+      spriteID: 2882141173137dc49810ba9bf467411e
+      internalID: -2031795057
       vertices: []
       indices: 
       edges: []
@@ -179,14 +179,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c53d994bcdcb2e4195ba8b00fe50af6
-      internalID: 2000192251
+      spriteID: 7fef9bd5409f3c94abcdd3abbf1a33f8
+      internalID: 1263334622
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
       name: UIMenuUpgrate_3
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 43
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaa0236e3e156de4c869fc4ae59f72be
+      internalID: 1248993863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIMenuUpgrate_4
       rect:
         serializedVersion: 2
         x: 96
@@ -200,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14d2b2dc051f9e9499660fee91c55f6e
-      internalID: -1867359111
+      spriteID: ab37ec7bf92d84143970f048e13ecceb
+      internalID: -247926708
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UIMenuUpgrate_4
+      name: UIMenuUpgrate_5
       rect:
         serializedVersion: 2
         x: 16
@@ -221,14 +242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12ebbb5a53dd6c84ba1fd9d10acfd05f
-      internalID: -128411817
+      spriteID: 1071ed91f9869174ea205946e43efd8c
+      internalID: 1096446266
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UIMenuUpgrate_5
+      name: UIMenuUpgrate_6
       rect:
         serializedVersion: 2
         x: 48
@@ -242,14 +263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93620c0061c3d984683c5ad649dda816
-      internalID: -960929143
+      spriteID: 0777152f674aa0746aa4f53901ada7e5
+      internalID: 691933080
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UIMenuUpgrate_6
+      name: UIMenuUpgrate_7
       rect:
         serializedVersion: 2
         x: 80
@@ -263,14 +284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd9dc1bf30ae38340a30c9664858a631
-      internalID: 817426164
+      spriteID: 967f0ab403114af4c8aa03cba8fd9bba
+      internalID: -656747837
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UIMenuUpgrate_7
+      name: UIMenuUpgrate_8
       rect:
         serializedVersion: 2
         x: 0
@@ -284,14 +305,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09df520e16f71ce43acd6b09412d0640
-      internalID: 825283026
+      spriteID: 2a6bd18a7d38e3548b1ff93bc966b489
+      internalID: 1863220577
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UIMenuUpgrate_8
+      name: UIMenuUpgrate_9
       rect:
         serializedVersion: 2
         x: 32
@@ -305,14 +326,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12ac4b01d30791f46b54a585d348175d
-      internalID: -1787949549
+      spriteID: 29e801672dc430a4597e856e852582d0
+      internalID: -1569302095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UIMenuUpgrate_9
+      name: UIMenuUpgrate_10
       rect:
         serializedVersion: 2
         x: 64
@@ -326,14 +347,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77a26ed904f1ac341ad88b498dddfba3
-      internalID: 1035777358
+      spriteID: aa3256632b179d9468f999a9f82d5ae6
+      internalID: 1571298257
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UIMenuUpgrate_10
+      name: UIMenuUpgrate_11
       rect:
         serializedVersion: 2
         x: 96
@@ -347,8 +368,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddac13841e97788458a4b399709b417b
-      internalID: 1987412574
+      spriteID: 1d59674bdd6006e4bb0e10f6e7e48bbf
+      internalID: 1431236801
       vertices: []
       indices: 
       edges: []
@@ -364,17 +385,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      UIMenuUpgrate_0: -2025056486
-      UIMenuUpgrate_1: -540668373
-      UIMenuUpgrate_10: 1987412574
-      UIMenuUpgrate_2: 2000192251
-      UIMenuUpgrate_3: -1867359111
-      UIMenuUpgrate_4: -128411817
-      UIMenuUpgrate_5: -960929143
-      UIMenuUpgrate_6: 817426164
-      UIMenuUpgrate_7: 825283026
-      UIMenuUpgrate_8: -1787949549
-      UIMenuUpgrate_9: 1035777358
+      UIMenuUpgrate_0: 1272312266
+      UIMenuUpgrate_1: -2031795057
+      UIMenuUpgrate_10: 1571298257
+      UIMenuUpgrate_11: 1431236801
+      UIMenuUpgrate_2: 1263334622
+      UIMenuUpgrate_3: 1248993863
+      UIMenuUpgrate_4: -247926708
+      UIMenuUpgrate_5: 1096446266
+      UIMenuUpgrate_6: 691933080
+      UIMenuUpgrate_7: -656747837
+      UIMenuUpgrate_8: 1863220577
+      UIMenuUpgrate_9: -1569302095
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

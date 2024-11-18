@@ -10,6 +10,8 @@ public static class SceneLoader
         MenuGame,
         LobbyGame,
         GameScene,
+        GameSceneTwo,
+        GameSceneThree,
         LoadingScene,
         ConnectionMenu
     }

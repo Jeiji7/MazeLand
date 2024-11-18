@@ -12,9 +12,5 @@ public class ThrowTrigger : MonoBehaviour
             Destroy(rockThrow, 0.1f);
         }
     }
-    void Start()
-    {
-
-    }
 
 }

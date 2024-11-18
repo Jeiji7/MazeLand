@@ -38,13 +38,22 @@ public class CharacterSelectReady : NetworkBehaviour
         {
             UnityEngine.Debug.LogError($"IS hosh");
             playerReadyDictionary[0] = true;
-
-
             LobbyRelayManager.Instance.DeleteLobby();
-            SceneLoader.LoadNetwork(SceneLoader.Scene.GameScene);
+            switch (LobbyGameSceneUI._sceneNumber)
+            {
+                case 0:
+                    SceneLoader.LoadNetwork(SceneLoader.Scene.GameScene);
+                    break;
+                case 1:
+                    SceneLoader.LoadNetwork(SceneLoader.Scene.GameSceneTwo);
+                    break;
+                case 2:
+                    SceneLoader.LoadNetwork(SceneLoader.Scene.GameSceneThree);
+                    break;
+            }
             //CursorController.DisableCursor();
             OnReadyChanged.Invoke();
-
+            LobbyGameSceneUI._sceneNumber = -1;
         }
         else
             SetPlayerReadyServerRpc();

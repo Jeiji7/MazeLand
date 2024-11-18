@@ -3,21 +3,16 @@ using Unity.Services.Lobbies.Models;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenuUI : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]private Button _mainMenuButton;
+    private void Init()
     {
-        
+        _mainMenuButton.onClick.AddListener(BackToMenu);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    private static void BackToMenu()
+        private static void BackToMenu()
     {
         LobbyRelayManager.Instance.LeaveLobby();
         NetworkManager.Singleton.Shutdown();
