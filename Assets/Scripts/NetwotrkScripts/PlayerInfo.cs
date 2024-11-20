@@ -48,8 +48,21 @@ public class PlayerInfo : MonoBehaviour
     //    LobbyRelayManager.Instance.KickPlayer(playerData.playerId.ToString());
     //    MultiplayerStorage.Instance.KickPlayerServerRpc(playerData.clientId);
     //}
-
-
+    // Метод для перезаписи числовых значений (int)
+    public void OverwriteIntData(string key, int value)
+    {
+        // Перезаписываем целочисленное значение
+        PlayerPrefs.SetInt(key, value);
+        // Сохраняем изменения
+        PlayerPrefs.Save();
+    }
+    public void OverwriteDataName(string key, string value)
+    {
+        // Перезаписываем данные с новым значением
+        PlayerPrefs.SetString(key, value);
+        // Необходимо сохранить изменения, если это требуется
+        PlayerPrefs.Save();
+    }
     private void MultiplayerStorage_OnPlayerDataNetworkListChanged()
     {
         UpdatePlayer();
@@ -60,9 +73,11 @@ public class PlayerInfo : MonoBehaviour
         if (MultiplayerStorage.Instance.IsPlayerIndexConnected(playerIndex))
         {
             Show();
-
+            OverwriteIntData("IndexGame", playerIndex);
             PlayerData playerData = MultiplayerStorage.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
+            OverwriteDataName("NamePlayer", playerData.playerName.ToString());
             playerNameText.text = playerData.playerName.ToString();
+            Debug.Log($"У этого игрока: {PlayerPrefs.GetString("NamePlayer")} индекс  {PlayerPrefs.GetInt("IndexGame")}");
             //CheckKickButton(playerData);
         }
         else

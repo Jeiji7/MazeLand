@@ -1,11 +1,14 @@
+using Mirror.BouncyCastle.Crypto.Utilities;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+
 public class GameOverWinUI : MonoBehaviour
 {
+    [SerializeField] private GameObject[] _player;
     public static GameOverWinUI Instance;
 
     public UnityEvent PlayerExit = new();
@@ -13,6 +16,21 @@ public class GameOverWinUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _gameOverWinText;
     [SerializeField] private Button _playAgainButton;
 
+    public enum WinState
+    {
+        FirstWin,
+        SecondWin,
+        ThirdWin,
+        FourthWin
+    }
+    public void SetPlayerIndex(int playerIndex)
+    {
+        // он даже не хочет картинку по индексу выдовать
+        Show();
+        
+        _player[playerIndex].SetActive(true);
+        _gameOverWinText.text = $"{MultiplayerStorage.Instance.GetPlayerDataFromPlayerIndex(playerIndex).playerName} you champion!!";
+    }
 
     private void Awake()
     {
@@ -27,28 +45,13 @@ public class GameOverWinUI : MonoBehaviour
 
     private void Start()
     {
-        GameStateManager.Instance.OnStateChanged.AddListener(GameManager_OnStateChanged);
         GameStateManager.Instance.OnOpenHUD.AddListener(() => { Show(); });
         GameStateManager.Instance.OnCloseHUD.AddListener(() => { Hide(); });
-        _playAgainButton.gameObject.SetActive(false);
+        //_playAgainButton.gameObject.SetActive(false);
         Hide();
     }
 
-    private void GameManager_OnStateChanged()
-    {
-        if (GameStateManager.Instance.GetGameState().ToString() == "GameOver")
-        {
-            ulong clientID = MultiplayerStorage.Instance.GetPlayerData().clientId;
-            GameStateManager.Instance.ReportPlayerLostServerRpc(clientID);
-            if (NetworkManager.Singleton.LocalClientId == clientID)
-                _gameOverWinText.text = $"{MultiplayerStorage.Instance.GetPlayerName()} you champion!!";
-            else
-                _gameOverWinText.text = $"You lose((((";
-            _playAgainButton.gameObject.SetActive(true);
-            RemoveListeners();
-            Show();
-        }
-    }
+
 
     private void RemoveListeners()
     {
@@ -69,3 +72,6 @@ public class GameOverWinUI : MonoBehaviour
         Debug.Log($"{gameObject.name} HIDE");
     }
 }
+
+
+

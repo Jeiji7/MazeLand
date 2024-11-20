@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 7616906830074812951}
   - component: {fileID: 9108857274413709475}
   - component: {fileID: 2764075919461201406}
-  - component: {fileID: 2040998695411434859}
-  - component: {fileID: 750275596089187035}
-  - component: {fileID: 8103754568826941728}
+  - component: {fileID: 5375790899846615972}
+  - component: {fileID: 537425218716904249}
+  - component: {fileID: 674014568244939153}
   m_Layer: 0
   m_Name: Throw
   m_TagString: Enemy
@@ -201,8 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3273336100
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2674002496
+  InScenePlacedSourceGlobalObjectIdHash: 1986997196
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &2040998695411434859
+--- !u!114 &5375790899846615972
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,21 +219,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4013672831525978331}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
-  m_Animator: {fileID: 9108857274413709475}
---- !u!114 &750275596089187035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4013672831525978331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 449f3b28dbb9a784b8a326464f1f7843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UseUnreliableDeltas: 0
@@ -255,7 +241,21 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &8103754568826941728
+--- !u!114 &537425218716904249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4013672831525978331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264c2909457b04546ba0dd8dc27fb3ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 9108857274413709475}
+--- !u!114 &674014568244939153
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

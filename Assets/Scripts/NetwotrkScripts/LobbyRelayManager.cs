@@ -62,7 +62,7 @@ public class LobbyRelayManager : MonoBehaviour
 
     public string GetPlayerName()
     {
-        return _playerName;
+        return PlayerPrefs.GetString("PlayerName");
     }
 
     public async Task CreateLobby(string lobbyName)
@@ -216,10 +216,12 @@ public class LobbyRelayManager : MonoBehaviour
 
     private async void InitializeUnityAuthentication(string playerName)
     {
+        _playerName = playerName; // Обновляем имя
+        PlayerPrefs.SetString("PlayerName", _playerName); // Сохраняем актуальное имя
+        MultiplayerStorage.Instance.SetPlayerName(_playerName);
+
         if (UnityServices.State != ServicesInitializationState.Initialized)
         {
-            _playerName = playerName;
-            MultiplayerStorage.Instance.SetPlayerName(playerName);
             InitializationOptions initializationOptions = new();
             initializationOptions.SetProfile(_playerName);
 
@@ -227,8 +229,7 @@ public class LobbyRelayManager : MonoBehaviour
 
             AuthenticationService.Instance.SignedIn += () =>
             {
-                Debug.Log($"{gameObject.name} Signed in! " + AuthenticationService.Instance.PlayerId);
-                Debug.Log($"{gameObject.name} Player name: " + _playerName);
+                Debug.Log($"Signed in! Player name: {_playerName}");
             };
 
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
@@ -237,6 +238,7 @@ public class LobbyRelayManager : MonoBehaviour
         else
             OnSignIn.Invoke();
     }
+
 
     private void HandlePeriodicListLobbies()
     {

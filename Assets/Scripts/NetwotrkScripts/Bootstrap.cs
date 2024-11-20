@@ -17,8 +17,16 @@ public class Bootstrap : MonoBehaviour
     {
         _multiplayerStorage.Init();
         _lobbyRelayManager.Init();
-        _connectBtn.onClick.AddListener(()=> { LobbyRelayManager.Instance.InitializeAuthentication(_inputField.text); });
+       
         //_fontLobbyUI.Init();
         //_lobbyMessageUI.Init();
     }
+    //private void Start()
+    //{
+    //    _connectBtn.onClick.AddListener(() => { LobbyRelayManager.Instance.InitializeAuthentication(_inputField.text); });
+    //}
+    //private void OnEnable()
+    //{
+    //    _connectBtn.onClick.AddListener(() => { LobbyRelayManager.Instance.InitializeAuthentication(_inputField.text); });
+    //}
 }

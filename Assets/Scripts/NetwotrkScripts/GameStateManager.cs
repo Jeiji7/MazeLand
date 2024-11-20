@@ -21,9 +21,11 @@ public class GameStateManager : NetworkBehaviour
     public enum State
     {
         WaitingToStart,
-        CountdownToStart,
-        GamePlaying,
-        GameOver
+      
+        FirstWin,
+        SecondWin,
+        ThirdWin,
+        FourthWin
       //4 статуса что кадждый из 4 игроков выйграл
       // например firstplayerWin
     }
@@ -44,6 +46,24 @@ public class GameStateManager : NetworkBehaviour
     private Dictionary<ulong, bool> playerReadyDictionary;
     private Dictionary<ulong, bool> playerPausedDictionary;
     private bool autoTestGamePausedState;
+
+    //private NetworkVariable<int> winnerIndex = new NetworkVariable<int>(-1);
+
+    //// Когда кто-то выигрывает, вызываем этот метод
+    ///// <summary>
+    /////Логика победы вроде как
+    ///// </summary>
+    //[ServerRpc(RequireOwnership = false)]
+    //public void ReportWinnerServerRpc(int playerIndex)
+    //{
+    //    winnerIndex.Value = playerIndex; // Синхронизируем на сервере
+    //    // Можно выполнить дополнительные действия для игры (например, вызвать окончания игры).
+    //}
+
+    //public int GetWinnerIndex()
+    //{
+    //    return winnerIndex.Value;
+    //}
 
     private void Awake()
     {
@@ -66,23 +86,9 @@ public class GameStateManager : NetworkBehaviour
         }
     }
 
-    private void Start()
-    {
-        SetPlayerReadyServerRpc();
-    }
-
     public void InvokeStartGameEvent() =>
         OnStartGame.Invoke();
 
-    public bool IsGamePlaying()
-    {
-        return state.Value == State.GamePlaying;
-    }
-
-    public bool IsCountdownToStartActive()
-    {
-        return state.Value == State.CountdownToStart;
-    }
 
     public float GetCountdownToStartTimer()
     {
@@ -94,15 +100,28 @@ public class GameStateManager : NetworkBehaviour
         return state.Value;
     }
 
-    public bool IsWaitingToStart()
-    {
-        return state.Value == State.WaitingToStart;
-    }
+    
 
-    public void SetGameOver()
+    public void DifineWinner(int playerIndex)
     {
         Time.timeScale = 0.0f;
-        state.Value = State.GameOver;
+        Debug.Log(playerIndex + "игрок");
+        switch (playerIndex)
+        {
+            case 0:
+                state.Value = State.FirstWin;
+                break;
+            case 1:
+                state.Value = State.SecondWin;
+                break;
+            case 2:
+                state.Value = State.ThirdWin;
+                break;
+            case 3:
+                state.Value = State.FourthWin;
+                break;
+
+        }
     }
 
     public bool IsLocalPlayerReady()
@@ -213,59 +232,6 @@ public class GameStateManager : NetworkBehaviour
         Debug.LogError($"State changed from {previousValue} to {newValue}");
     }
 
-    [ServerRpc(RequireOwnership = false)]
-
-    private void SetPlayerReadyServerRpc(ServerRpcParams serverRpcParams = default)
-    {
-        playerReadyDictionary[serverRpcParams.Receive.SenderClientId] = true;
-
-        bool allClientsReady = true;
-        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
-        {
-            if (!playerReadyDictionary.ContainsKey(clientId) || !playerReadyDictionary[clientId])
-            {
-                allClientsReady = false;
-                break;
-            }
-        }
-
-        if (allClientsReady)
-        {
-            state.Value = State.CountdownToStart;
-            Debug.Log($"CountdownToStart started");
-        }
-    }
-
-
-    private void Update()
-    {
-        if (!IsServer)
-        {
-            return;
-        }
-
-        switch (state.Value)
-        {
-            case State.WaitingToStart:
-                break;
-            case State.CountdownToStart:
-                countdownToStartTimer.Value -= Time.deltaTime;
-                if (countdownToStartTimer.Value < 0f)
-                {
-                    state.Value = State.GamePlaying;
-                    gamePlayingTimer.Value = gamePlayingTimerMax;
-                }
-                break;
-            //case State.GamePlaying:
-            //    gamePlayingTimer.Value -= Time.deltaTime;
-            //    if (gamePlayingTimer.Value < 0f)
-            //    {
-            //        state.Value = State.WinGhost;
-            //    }
-            //    break;
-
-        }
-    }
 
     private void LateUpdate()
     {

@@ -41,6 +41,12 @@ public class MultiplayerStorage : NetworkBehaviour
 
         PlayerPrefs.SetString(PLAYER_PREFS_PLAYER_NAME_MULTIPLAYER, playerName);
         Debug.Log($"{gameObject.name}: set player name {playerName}");
+
+        // Синхронизируем имя на сервере
+        if (NetworkManager.Singleton.IsConnectedClient)
+        {
+            SetPlayerNameServerRpc(playerName);
+        }
     }
 
     public void StartClient()
@@ -92,9 +98,9 @@ public class MultiplayerStorage : NetworkBehaviour
             }
             if (playerData.clientId == clientId)
             {
-                Debug.LogError($"GetPlayerDataFromClientId return playerdata {playerData.playerName}");
-                Debug.LogError($"GetPlayerDataFromClientId return playerdata {playerData.playerId}");
-                Debug.LogError($"GetPlayerDataFromClientId return playerdata {playerData.clientId}");
+                Debug.LogError($"GetPlayerDataFromClientId return playerdata {playerData.playerName} + Первая");
+                Debug.LogError($"GetPlayerDataFromClientId return playerdata {playerData.playerId} + Вторая");
+                Debug.LogError($"GetPlayerDataFromClientId return playerdata {playerData.clientId} + Третья");
                 return playerData;
             }
         }
@@ -178,15 +184,16 @@ public class MultiplayerStorage : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void SetPlayerNameServerRpc(string playerName, ServerRpcParams serverRpcParams = default)
+    public void SetPlayerNameServerRpc(string playerName, ServerRpcParams serverRpcParams = default)
     {
         int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId);
 
-        PlayerData playerData = _playerDataNetworkList[playerDataIndex];
-
-        playerData.playerName = playerName;
-
-        _playerDataNetworkList[playerDataIndex] = playerData;
+        if (playerDataIndex >= 0)
+        {
+            PlayerData playerData = _playerDataNetworkList[playerDataIndex];
+            playerData.playerName = playerName;
+            _playerDataNetworkList[playerDataIndex] = playerData;
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -231,4 +238,5 @@ public class MultiplayerStorage : NetworkBehaviour
     {
         OnFailedToJoinGame?.Invoke();
     }
+   
 }

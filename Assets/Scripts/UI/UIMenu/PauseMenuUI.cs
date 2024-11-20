@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PauseMenuUI : NetworkBehaviour
 {
     [SerializeField]private Button _mainMenuButton;
-    private void Init()
+    private void Awake()
     {
         _mainMenuButton.onClick.AddListener(BackToMenu);
     }

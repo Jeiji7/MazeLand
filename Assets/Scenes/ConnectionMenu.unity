@@ -427,6 +427,11 @@ MonoBehaviour:
   _inputField: {fileID: 775843705}
   _lobbyRelayManager: {fileID: 1839787785}
   _multiplayerStorage: {fileID: 1363386402}
+--- !u!1 &603361427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9110596890250906488, guid: 19af1bce2e949b9428f0fa5555cb0a39, type: 3}
+  m_PrefabInstance: {fileID: 1605698419205142435}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &665877076
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +490,20 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6126237583126801523, guid: 19af1bce2e949b9428f0fa5555cb0a39, type: 3}
   m_PrefabInstance: {fileID: 1605698419205142435}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &936290207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603361427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efb7816a3cce9547ba77513612592c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameInputField: {fileID: 775843705}
+  continueButton: {fileID: 884438975}
 --- !u!1001 &1363386401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -833,6 +852,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 80340026}
     m_Modifications:
+    - target: {fileID: 1418302007543360699, guid: 19af1bce2e949b9428f0fa5555cb0a39, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6126237583126801523, guid: 19af1bce2e949b9428f0fa5555cb0a39, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -913,6 +936,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8498384350158179036, guid: 19af1bce2e949b9428f0fa5555cb0a39, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498384350158179036, guid: 19af1bce2e949b9428f0fa5555cb0a39, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498384350158179036, guid: 19af1bce2e949b9428f0fa5555cb0a39, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 936290207}
+    - target: {fileID: 8498384350158179036, guid: 19af1bce2e949b9428f0fa5555cb0a39, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498384350158179036, guid: 19af1bce2e949b9428f0fa5555cb0a39, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SavePlayerName
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498384350158179036, guid: 19af1bce2e949b9428f0fa5555cb0a39, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerNameInput, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498384350158179036, guid: 19af1bce2e949b9428f0fa5555cb0a39, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 9110596890250906488, guid: 19af1bce2e949b9428f0fa5555cb0a39, type: 3}
       propertyPath: m_Name
       value: NameMenu
@@ -920,7 +971,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9110596890250906488, guid: 19af1bce2e949b9428f0fa5555cb0a39, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 936290207}
   m_SourcePrefab: {fileID: 100100000, guid: 19af1bce2e949b9428f0fa5555cb0a39, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

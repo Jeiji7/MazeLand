@@ -87,4 +87,27 @@ public class Move : NetworkBehaviour
         // Проверка, соприкасается ли игрок с землёй
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
+
+    public void SpeedUP()
+    {
+        StartCoroutine(MoreSpeedPlayer());
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Speed"))
+        {
+            GameObject speedBoost = collision.gameObject;
+            SpeedUP();
+            Destroy(speedBoost, 0.2f);
+        }
+    }
+
+    private IEnumerator MoreSpeedPlayer()
+    {
+        speedPlayer += 3f;
+        yield return new WaitForSeconds(5f);
+        speedPlayer -= 3f;
+    }
+
 }
